@@ -1,0 +1,534 @@
+/* =============================================================================
+   Preset: suico
+   Tipografia suíça — Space Grotesk + Inter, radius 0, accent laranja
+   Estrutura espelhada de terminal.css (escopo, ordem, tokens).
+   ============================================================================= */
+
+:root {
+  --bg: #f3f3ef;
+  --surface: #ffffff;
+  --surface-2: #e9e9e3;
+  --border: #111111;
+  --text: #111111;
+  --text-strong: #111111;
+  --text-muted: #5b5b57;
+  --accent: #ff4d00;
+  --accent-text: #c23700;
+  --accent-2: #e9e9e3;
+  --ink: #111111;
+  --on-ink: #f3f3ef;
+  --on-accent: #111111;
+  --ok: #0a7d4f;
+  --danger: #c23700;
+  --warn: #e0a100;
+  --info: #1f4fd8;
+
+  --code-keyword: #ff4d00;
+  --code-string: #f2c14e;
+  --code-number: #8bd3a8;
+  --code-comment: #9a9a95;
+  --code-title: #8fb4ff;
+  --code-type: #f2c14e;
+  --code-meta: #c9c9c4;
+
+  /* Sem aspas — page-chrome / getComputedStyle */
+  --font-display: Space Grotesk, sans-serif;
+  --font-body: Inter, sans-serif;
+  --font-mono: JetBrains Mono, ui-monospace, monospace;
+  --fs-body: 9.5pt;
+  --radius: 0;
+  --radius-sm: 0;
+  --radius-pill: 0;
+}
+
+/* --------------------------------------------------------------------------- */
+
+[data-preset="suico"] {
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  color: var(--text);
+}
+
+[data-preset="suico"] .doc {
+  background: var(--bg);
+}
+
+/* Sem cantos arredondados */
+[data-preset="suico"] .hero,
+[data-preset="suico"] .card,
+[data-preset="suico"] .code-window,
+[data-preset="suico"] .table-wrap,
+[data-preset="suico"] :not(pre) > code,
+[data-preset="suico"] blockquote,
+[data-preset="suico"] .badge {
+  border-radius: 0;
+}
+
+/* Capitular da base — neutro (ornamento opcional) */
+[data-preset="suico"][data-dropcap="true"] .content > p:first-of-type::first-letter {
+  float: none;
+  font-size: inherit;
+  font-family: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+  padding: 0;
+  color: inherit;
+}
+
+/* ===== Hero =============================================================== */
+
+[data-preset="suico"] .hero {
+  background: transparent;
+  border: none;
+  border-top: 8pt solid var(--ink);
+  box-shadow: none;
+  border-radius: 0;
+  padding: 0.65rem 0 1rem;
+  margin: 0 0 1.25rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  position: relative;
+}
+
+[data-preset="suico"] .hero-meta {
+  display: contents;
+}
+
+[data-preset="suico"] .hero-eyebrow {
+  order: 1;
+  flex: 1 1 auto;
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-body);
+  font-size: 8pt;
+  font-weight: 400;
+  letter-spacing: 0;
+  text-transform: lowercase;
+  color: var(--text-muted);
+}
+
+[data-preset="suico"] .hero-side {
+  display: block;
+  order: 2;
+  position: static;
+  top: auto;
+  right: auto;
+  max-width: none;
+  margin: 0;
+  padding: 0;
+  opacity: 1;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 11pt;
+  letter-spacing: -0.02em;
+  word-spacing: 0.06em;
+  text-align: right;
+  white-space: nowrap;
+  color: var(--accent-text);
+}
+
+[data-preset="suico"] .hero-title {
+  order: 10;
+  flex: 0 0 100%;
+  width: 100%;
+  max-width: none;
+  margin: 0.35rem 0 0.4rem;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 28pt;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  word-spacing: 0.08em;
+  text-transform: none;
+  text-wrap: balance;
+  color: var(--text);
+}
+
+[data-preset="suico"] .hero-title mark {
+  background: transparent;
+  color: var(--accent);
+}
+
+[data-preset="suico"] .hero-subtitle {
+  order: 11;
+  flex: 0 0 100%;
+  width: 100%;
+  margin: 0 0 0.55rem;
+  font-family: var(--font-body);
+  font-size: 10.5pt;
+  font-weight: 400;
+  color: var(--text-muted);
+  max-width: none;
+}
+
+[data-preset="suico"] .hero::after {
+  content: "";
+  order: 19;
+  flex: 0 0 100%;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+[data-preset="suico"] .hero-meta .hero-date {
+  order: 20;
+  margin: 0 0.75rem 0.3rem 0;
+  font-family: var(--font-body);
+  font-size: 8.5pt;
+  font-weight: 400;
+  color: var(--text-muted);
+}
+
+[data-preset="suico"] .hero-meta .badge {
+  order: 21;
+  margin: 0 0.4rem 0.3rem 0;
+}
+
+/* stamp / dimension continuam escondidos (base) */
+[data-preset="suico"] .doc-stamp,
+[data-preset="suico"] .dimension-label {
+  display: none;
+}
+
+/* ===== Badges — retângulos ================================================ */
+
+[data-preset="suico"] .badge {
+  display: inline-block;
+  white-space: nowrap;
+  padding: 0.15em 0.45em;
+  margin: 0 0.15em;
+  border-radius: 0;
+  border: none;
+  font-family: var(--font-display);
+  font-size: 7.5pt;
+  font-weight: 700;
+  letter-spacing: 0;
+  text-transform: lowercase;
+  line-height: 1.35;
+  background: var(--ink);
+  color: var(--on-ink);
+}
+
+[data-preset="suico"] .badge.bloqueia,
+[data-preset="suico"] .badge.erro {
+  background: var(--accent);
+  color: var(--on-accent);
+  border: none;
+}
+
+[data-preset="suico"] .badge.importante,
+[data-preset="suico"] .badge.aviso {
+  background: var(--warn);
+  color: var(--on-accent);
+  border: none;
+}
+
+[data-preset="suico"] .badge.ok {
+  background: var(--ink);
+  color: var(--on-ink);
+  border: none;
+}
+
+[data-preset="suico"] .badge.menor,
+[data-preset="suico"] .badge.info {
+  background: transparent;
+  color: var(--text);
+  border: 1px solid var(--ink);
+}
+
+/* ===== Títulos ============================================================ */
+
+[data-preset="suico"] h1,
+[data-preset="suico"] h2,
+[data-preset="suico"] h3,
+[data-preset="suico"] h4 {
+  font-family: var(--font-display);
+  text-transform: none;
+  letter-spacing: -0.03em;
+  word-spacing: 0.06em;
+  text-wrap: balance;
+}
+
+[data-preset="suico"] h2 {
+  display: flex;
+  align-items: baseline;
+  gap: 0.4rem;
+  width: 100%;
+  margin: 1.35rem 0 0.55rem;
+  padding-top: 6pt;
+  border-top: 2pt solid var(--ink);
+  font-weight: 700;
+  font-size: 15pt;
+  line-height: 1.15;
+  color: var(--text);
+}
+
+[data-preset="suico"] h2::before {
+  content: counter(sec, decimal-leading-zero) " ";
+  display: inline;
+  width: auto;
+  height: auto;
+  border-radius: 0;
+  background: none;
+  flex-shrink: 0;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 28pt;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  word-spacing: 0.06em;
+  color: var(--accent);
+}
+
+[data-preset="suico"] h3 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 10.5pt;
+  letter-spacing: -0.02em;
+  word-spacing: 0.06em;
+  color: var(--text);
+  margin: 1rem 0 0.4rem;
+}
+
+/* ===== Cards — blocos sólidos ============================================= */
+
+[data-preset="suico"] .card {
+  border-radius: 0;
+  border: none;
+  padding: 0.75rem 0.9rem;
+}
+
+[data-preset="suico"] .card-card {
+  background: var(--surface);
+  border: 1.5pt solid var(--ink);
+  color: var(--text);
+}
+
+[data-preset="suico"] .card-ok {
+  background: var(--ink);
+  border: none;
+  color: var(--on-ink);
+}
+
+[data-preset="suico"] .card-erro {
+  background: var(--accent);
+  border: none;
+  color: var(--on-accent);
+}
+
+[data-preset="suico"] .card-aviso {
+  background: var(--warn);
+  border: none;
+  color: var(--on-accent);
+}
+
+[data-preset="suico"] .card-info {
+  background: var(--surface-2);
+  border: 1.5pt solid var(--ink);
+  color: var(--text);
+}
+
+[data-preset="suico"] .card[data-label]::before {
+  content: attr(data-label) " ";
+  display: block;
+  font-family: var(--font-display);
+  font-size: 7.5pt;
+  font-weight: 700;
+  letter-spacing: 0;
+  text-transform: lowercase;
+  margin-bottom: 0.35rem;
+  color: inherit;
+  opacity: 0.85;
+}
+
+[data-preset="suico"] .card-ok strong,
+[data-preset="suico"] .card-erro strong,
+[data-preset="suico"] .card-aviso strong {
+  color: inherit;
+}
+
+[data-preset="suico"] .card-ok :not(pre) > code,
+[data-preset="suico"] .card-erro :not(pre) > code,
+[data-preset="suico"] .card-aviso :not(pre) > code {
+  background: color-mix(in srgb, currentColor 15%, transparent);
+  color: inherit;
+  border: none;
+}
+
+/* ===== Código inline ====================================================== */
+
+[data-preset="suico"] :not(pre) > code {
+  font-family: var(--font-mono);
+  font-size: 8.25pt;
+  font-variant-ligatures: none;
+  font-feature-settings: "liga" 0, "calt" 0;
+  padding: 1pt 4pt;
+  border-radius: 0;
+  background: var(--surface-2);
+  color: var(--text);
+  border: none;
+}
+
+/* ===== Blocos de código =================================================== */
+
+[data-preset="suico"] .code-window {
+  background: var(--ink);
+  border: none;
+  border-radius: 0;
+  overflow: visible;
+}
+
+[data-preset="suico"] .code-window,
+[data-preset="suico"] .code-window code,
+[data-preset="suico"] .code-window .hljs {
+  color: var(--on-ink);
+}
+
+[data-preset="suico"] .code-window-bar {
+  display: flex;
+  align-items: center;
+  min-height: 14pt;
+  height: 14pt;
+  box-sizing: border-box;
+  background: var(--accent);
+  border-bottom: none;
+  padding: 0 0.65rem;
+}
+
+[data-preset="suico"] .code-window-dots {
+  display: none;
+}
+
+[data-preset="suico"] .code-window-title {
+  font-family: var(--font-display);
+  font-size: 8pt;
+  font-weight: 700;
+  letter-spacing: 0;
+  text-transform: lowercase;
+  color: var(--on-accent);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+[data-preset="suico"] .code-window pre {
+  padding: 0.7rem 0.85rem;
+}
+
+[data-preset="suico"] .code-window code {
+  font-family: var(--font-mono);
+  font-size: var(--fs-code);
+  font-variant-ligatures: none;
+  font-feature-settings: "liga" 0, "calt" 0;
+}
+
+/* sem numeração de linhas */
+[data-preset="suico"] .code-window .ln::before {
+  content: none;
+  display: none;
+}
+
+/* ===== Tabelas ============================================================ */
+
+[data-preset="suico"] .table-wrap {
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  overflow: visible;
+}
+
+[data-preset="suico"] table {
+  background: transparent;
+}
+
+[data-preset="suico"] th {
+  background: transparent;
+  color: var(--text);
+  font-family: var(--font-display);
+  font-size: 7.5pt;
+  font-weight: 700;
+  letter-spacing: 0;
+  text-transform: lowercase;
+  border: none;
+  border-bottom: 0.75pt solid var(--ink);
+  padding: 4pt 6pt;
+}
+
+[data-preset="suico"] td {
+  border: none;
+  border-bottom: 0.25pt solid color-mix(in srgb, var(--ink) 35%, transparent);
+  background: transparent !important;
+  color: var(--text);
+  font-size: 8.5pt;
+}
+
+[data-preset="suico"] td:first-child {
+  font-family: var(--font-display);
+  font-weight: 700;
+  color: var(--text);
+}
+
+[data-preset="suico"] tbody tr:nth-child(even) td {
+  background: transparent !important;
+}
+
+[data-preset="suico"] tbody tr:last-child td {
+  border-bottom: 0.25pt solid color-mix(in srgb, var(--ink) 35%, transparent);
+}
+
+/* ===== Listas ============================================================= */
+
+[data-preset="suico"] ul > li::before {
+  content: "";
+  background: var(--ink);
+  width: 5pt;
+  height: 5pt;
+  border-radius: 0;
+  top: 0.45em;
+  left: 0.15rem;
+}
+
+[data-preset="suico"] ol > li::marker {
+  color: var(--text);
+  font-family: var(--font-display);
+  font-weight: 700;
+}
+
+/* ===== Blockquote ========================================================= */
+
+[data-preset="suico"] blockquote {
+  background: transparent;
+  border: none;
+  border-left: 4pt solid var(--accent);
+  border-radius: 0;
+  padding: 0.2rem 0 0.2rem 0.75rem;
+  margin: 0.85rem 0;
+  color: var(--text);
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 11pt;
+  letter-spacing: -0.02em;
+  word-spacing: 0.06em;
+}
+
+[data-preset="suico"] blockquote p {
+  margin: 0;
+  color: inherit;
+  font: inherit;
+}
+
+/* ===== Metadados / links ================================================== */
+
+[data-preset="suico"] a {
+  color: var(--accent-text);
+}
+
+[data-preset="suico"] strong {
+  color: var(--text);
+  font-weight: 600;
+}
+
+[data-preset="suico"] hr {
+  border-top: 1.5pt solid var(--ink);
+}

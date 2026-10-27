@@ -1,0 +1,512 @@
+/* =============================================================================
+   Preset: editorial
+   Tipografia de revista — Fraunces + Inter, papel quente, accent vinho
+   Estrutura espelhada de terminal.css (escopo, ordem, tokens).
+   ============================================================================= */
+
+:root {
+  --bg: #f5efe3;
+  --surface: #fbf7ee;
+  --surface-2: #efe7d6;
+  --border: #d9ceb8;
+  --text: #2b2620;
+  --text-strong: #1d1a15;
+  --text-muted: #6b6254;
+  --accent: #9b2d20;
+  --accent-2: #efe7d6;
+  --ok: #3d6b4a;
+  --danger: #9b2d20;
+  --warn: #8a5e12;
+  --info: #3f6b8f;
+
+  --code-keyword: #9b2d20;
+  --code-string: #3d6b4a;
+  --code-number: #8a5e12;
+  --code-comment: #6b6254;
+  --code-title: #3f6b8f;
+  --code-type: #7a4a8f;
+  --code-meta: #3f6b8f;
+
+  /* Sem aspas — page-chrome / getComputedStyle */
+  --font-display: Fraunces, "Times New Roman", serif;
+  --font-body: Inter, sans-serif;
+  --font-mono: JetBrains Mono, ui-monospace, monospace;
+  --fs-body: 9.5pt;
+  --radius: 0;
+  --radius-sm: 0;
+  --radius-pill: 0;
+}
+
+/* --------------------------------------------------------------------------- */
+
+[data-preset="editorial"] {
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  color: var(--text);
+}
+
+[data-preset="editorial"] .doc {
+  background: var(--bg);
+}
+
+[data-preset="editorial"] .hero,
+[data-preset="editorial"] .card,
+[data-preset="editorial"] .code-window,
+[data-preset="editorial"] .table-wrap,
+[data-preset="editorial"] blockquote {
+  border-radius: 0;
+}
+
+/* ===== Hero =============================================================== */
+
+[data-preset="editorial"] .hero {
+  background: transparent;
+  border: none;
+  border-bottom: 0.5pt solid var(--text);
+  box-shadow: none;
+  padding: 0 0 0.85rem;
+  margin: 0 0 1.25rem;
+  position: relative;
+}
+
+[data-preset="editorial"] .hero-eyebrow {
+  margin: 0 0 0.55rem;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 9pt;
+  font-variant: small-caps;
+  letter-spacing: 0.12em;
+  text-transform: none;
+  color: var(--text-muted);
+}
+
+[data-preset="editorial"] .hero-title {
+  margin: 0 0 0.45rem;
+  max-width: none;
+  padding-top: 6pt;
+  border-top: 3pt double var(--text);
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 30pt;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  word-spacing: 0.06em;
+  text-transform: none;
+  text-wrap: balance;
+  color: var(--text-strong);
+}
+
+[data-preset="editorial"] .hero-title mark {
+  background: transparent;
+  color: var(--accent);
+  font-style: italic;
+  font-weight: 400;
+}
+
+[data-preset="editorial"] .hero-subtitle {
+  margin: 0 0 0.65rem;
+  font-family: var(--font-body);
+  font-size: 10pt;
+  font-weight: 400;
+  color: var(--text-muted);
+  max-width: 42em;
+}
+
+[data-preset="editorial"] .hero-meta .hero-date {
+  font-size: 8.5pt;
+  color: var(--text-muted);
+}
+
+[data-preset="editorial"] .doc-stamp,
+[data-preset="editorial"] .hero-side,
+[data-preset="editorial"] .dimension-label {
+  display: none;
+}
+
+/* ===== Badges — só filete inferior ======================================== */
+
+[data-preset="editorial"] .badge {
+  display: inline-block;
+  white-space: nowrap;
+  background: transparent !important;
+  border: none !important;
+  border-bottom: 2pt solid var(--text) !important;
+  border-radius: 0;
+  padding: 0 0 1pt;
+  margin: 0 0.35em 0 0;
+  font-family: var(--font-body);
+  font-size: 8.5pt;
+  font-weight: 600;
+  letter-spacing: 0;
+  text-transform: lowercase;
+  line-height: 1.3;
+  color: var(--text) !important;
+}
+
+[data-preset="editorial"] .badge.bloqueia,
+[data-preset="editorial"] .badge.erro {
+  border-bottom-color: var(--danger) !important;
+}
+
+[data-preset="editorial"] .badge.importante,
+[data-preset="editorial"] .badge.aviso {
+  border-bottom-color: var(--warn) !important;
+}
+
+[data-preset="editorial"] .badge.ok {
+  border-bottom-color: var(--ok) !important;
+}
+
+[data-preset="editorial"] .badge.menor,
+[data-preset="editorial"] .badge.info {
+  border-bottom-color: var(--info) !important;
+}
+
+/* ===== Títulos ============================================================ */
+
+[data-preset="editorial"] h1,
+[data-preset="editorial"] h2,
+[data-preset="editorial"] h3,
+[data-preset="editorial"] h4 {
+  font-family: var(--font-display);
+  text-transform: none;
+  letter-spacing: -0.01em;
+  word-spacing: 0.06em;
+  text-wrap: balance;
+}
+
+[data-preset="editorial"] h2 {
+  display: flex;
+  align-items: baseline;
+  gap: 0.4rem;
+  width: 100%;
+  margin: 1.4rem 0 0.55rem;
+  padding-top: 6pt;
+  border-top: 0.5pt solid var(--text);
+  font-weight: 400;
+  font-size: 15pt;
+  line-height: 1.15;
+  color: var(--text-strong);
+}
+
+[data-preset="editorial"] h2::before {
+  content: counter(sec, decimal-leading-zero) " ";
+  display: inline;
+  width: auto;
+  height: auto;
+  border-radius: 0;
+  background: none;
+  flex-shrink: 0;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 24pt;
+  line-height: 1;
+  letter-spacing: -0.01em;
+  color: var(--accent);
+}
+
+[data-preset="editorial"] h3 {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 12pt;
+  letter-spacing: -0.01em;
+  color: var(--text-strong);
+  margin: 1rem 0 0.4rem;
+}
+
+/* Capitular: 1º parágrafo após o 1º h2 */
+[data-preset="editorial"][data-dropcap="true"] .content > p:first-of-type::first-letter {
+  float: none;
+  font-size: inherit;
+  font-family: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+  padding: 0;
+  color: inherit;
+}
+
+[data-preset="editorial"][data-dropcap="true"] .content > h2:first-of-type + p::first-letter {
+  float: left;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 3.1em;
+  line-height: 0.85;
+  padding: 0.05em 0.1em 0 0;
+  color: var(--accent);
+}
+
+/* ===== Cards — notas de margem ============================================ */
+
+[data-preset="editorial"] .card {
+  display: grid;
+  grid-template-columns: 48pt 1fr;
+  column-gap: 0.65rem;
+  background: transparent;
+  border: none;
+  border-top: 0.5pt solid var(--border);
+  border-radius: 0;
+  padding: 0.55rem 0 0.35rem;
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+
+[data-preset="editorial"] .card > * {
+  grid-column: 2;
+}
+
+[data-preset="editorial"] .card[data-label]::before {
+  content: attr(data-label) " ";
+  grid-column: 1;
+  grid-row: 1;
+  display: block;
+  margin: 0;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 10pt;
+  letter-spacing: 0;
+  text-transform: lowercase;
+  color: var(--text-muted);
+}
+
+[data-preset="editorial"] .card-ok {
+  border-top-color: var(--ok);
+  background: transparent;
+}
+[data-preset="editorial"] .card-ok[data-label]::before { color: var(--ok); }
+
+[data-preset="editorial"] .card-erro {
+  border-top-color: var(--danger);
+  background: transparent;
+}
+[data-preset="editorial"] .card-erro[data-label]::before { color: var(--danger); }
+
+[data-preset="editorial"] .card-aviso {
+  border-top-color: var(--warn);
+  background: transparent;
+}
+[data-preset="editorial"] .card-aviso[data-label]::before { color: var(--warn); }
+
+[data-preset="editorial"] .card-info {
+  border-top-color: var(--info);
+  background: transparent;
+}
+[data-preset="editorial"] .card-info[data-label]::before { color: var(--info); }
+
+[data-preset="editorial"] .card-card {
+  border-top-color: var(--accent);
+  background: transparent;
+}
+[data-preset="editorial"] .card-card[data-label]::before { color: var(--accent); }
+
+/* ===== Código inline ====================================================== */
+
+[data-preset="editorial"] :not(pre) > code {
+  font-family: var(--font-mono);
+  font-size: 8.25pt;
+  font-weight: 400;
+  font-variant-ligatures: none;
+  font-feature-settings: "liga" 0, "calt" 0;
+  padding: 1pt 4pt;
+  border-radius: 2pt;
+  background: var(--surface-2);
+  color: var(--text-strong);
+  border: none;
+}
+
+/* ===== Blocos de código =================================================== */
+
+[data-preset="editorial"] .code-window {
+  display: flex;
+  flex-direction: column;
+  background: var(--surface-2);
+  border: none;
+  border-top: 0.5pt solid var(--text);
+  border-bottom: 0.5pt solid var(--text);
+  border-radius: 0;
+  overflow: visible;
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+
+[data-preset="editorial"] .code-window-bar {
+  order: -1;
+  display: block;
+  background: transparent;
+  border: none;
+  padding: 0 0 0.35rem;
+  min-height: 0;
+}
+
+[data-preset="editorial"] .code-window-dots {
+  display: none;
+}
+
+[data-preset="editorial"] .code-window-title {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 8.5pt;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+[data-preset="editorial"] .code-window pre {
+  padding: 0.55rem 0.15rem 0.65rem;
+}
+
+[data-preset="editorial"] .code-window code,
+[data-preset="editorial"] .code-window .hljs {
+  font-family: var(--font-mono);
+  font-size: var(--fs-code);
+  font-weight: 400;
+  font-variant-ligatures: none;
+  font-feature-settings: "liga" 0, "calt" 0;
+  color: var(--text);
+}
+
+[data-preset="editorial"] .code-window .ln::before {
+  content: none;
+  display: none;
+}
+
+[data-preset="editorial"] .hljs-comment {
+  font-style: italic;
+  color: var(--code-comment);
+}
+
+/* ===== Tabelas (booktabs) ================================================= */
+
+[data-preset="editorial"] .table-wrap {
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  overflow: visible;
+}
+
+[data-preset="editorial"] table {
+  background: transparent;
+  border-top: 1.5pt solid var(--text);
+  border-bottom: 1.5pt solid var(--text);
+}
+
+[data-preset="editorial"] th {
+  background: transparent;
+  color: var(--text-strong);
+  font-family: var(--font-body);
+  font-size: 7.5pt;
+  font-weight: 600;
+  font-variant: small-caps;
+  letter-spacing: 0.06em;
+  text-transform: none;
+  border: none;
+  border-bottom: 0.5pt solid var(--text);
+  padding: 4pt 6pt;
+}
+
+[data-preset="editorial"] td {
+  border: none;
+  border-bottom: none;
+  background: transparent !important;
+  color: var(--text);
+  font-size: 8.5pt;
+  padding: 4pt 6pt;
+}
+
+[data-preset="editorial"] tbody tr:nth-child(even) td {
+  background: transparent !important;
+}
+
+[data-preset="editorial"] tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* ===== Listas ============================================================= */
+
+[data-preset="editorial"] ul > li::before {
+  content: "— ";
+  background: none;
+  width: auto;
+  height: auto;
+  border-radius: 0;
+  color: var(--accent);
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 9.5pt;
+  line-height: 1;
+  top: 0.05em;
+  left: 0;
+}
+
+[data-preset="editorial"] ol > li::marker {
+  color: var(--accent);
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 400;
+}
+
+/* ===== Blockquote ========================================================= */
+
+[data-preset="editorial"] blockquote {
+  position: relative;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  margin: 0.9rem 0;
+  padding: 0.15rem 0 0.15rem 14pt;
+  color: var(--text);
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 12pt;
+  letter-spacing: -0.01em;
+  word-spacing: 0.06em;
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+
+[data-preset="editorial"] blockquote::before {
+  content: "“ ";
+  position: absolute;
+  left: 0;
+  top: -0.15em;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 2.2em;
+  line-height: 1;
+  color: var(--accent);
+}
+
+[data-preset="editorial"] blockquote p {
+  margin: 0;
+  color: inherit;
+  font: inherit;
+}
+
+/* ===== Metadados / links ================================================== */
+
+[data-preset="editorial"] a {
+  color: var(--accent);
+}
+
+[data-preset="editorial"] strong {
+  color: var(--text-strong);
+  font-weight: 600;
+}
+
+[data-preset="editorial"] em {
+  font-family: var(--font-display);
+  font-style: italic;
+  color: var(--text);
+}
+
+[data-preset="editorial"] hr {
+  border-top: 0.5pt solid var(--text);
+}

@@ -1,0 +1,24 @@
+/* Dark verde-petróleo / esmeralda */
+:root {
+  --bg: #06100f;
+  --surface: #0c1a18;
+  --surface-2: #102420;
+  --border: #00c2a8;
+  --accent: #00c2a8;
+  --accent-2: #0f3d36;
+  --text: #e2f2ee;
+  --text-muted: #6e8f87;
+
+  --ok: #3dcf8e;
+  --danger: #ff7b7b;
+  --warn: #f0b429;
+  --info: #5b9dff;
+
+  --code-keyword: #5eead4;
+  --code-string: #a3e635;
+  --code-number: #fbbf24;
+  --code-comment: #6e8f87;
+  --code-title: #7dd3fc;
+  --code-type: #fde68a;
+  --code-meta: #67e8f9;
+}

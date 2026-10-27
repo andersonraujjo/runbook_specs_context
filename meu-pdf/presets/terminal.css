@@ -1,0 +1,603 @@
+/* =============================================================================
+   Preset: terminal
+   Visual de terminal/CLI — JetBrains Mono, radius 0, prefixos $, ##, //
+   Paths de fonte relativos a out/*.html
+   ============================================================================= */
+
+/* JetBrains Mono 400/500/700 — build já injeta 400/500; 700 garantido aqui */
+@font-face {
+  font-family: "JetBrains Mono";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../node_modules/@fontsource/jetbrains-mono/files/jetbrains-mono-latin-400-normal.woff2") format("woff2");
+}
+@font-face {
+  font-family: "JetBrains Mono";
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("../node_modules/@fontsource/jetbrains-mono/files/jetbrains-mono-latin-500-normal.woff2") format("woff2");
+}
+@font-face {
+  font-family: "JetBrains Mono";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("../node_modules/@fontsource/jetbrains-mono/files/jetbrains-mono-latin-700-normal.woff2") format("woff2");
+}
+
+:root {
+  --bg: #0c1210;
+  --surface: #101915;
+  --surface-2: #070b09;
+  --border: #1f2d26;
+  --text: #c9d6cf;
+  --text-strong: #e8f3ec;
+  --text-muted: #6f8378;
+  --accent: #3ddc97;
+  --accent-2: #1f2d26;
+  --ok: #3ddc97;
+  --danger: #ff7a7a;
+  --warn: #ffc857;
+  --info: #6cb8ff;
+
+  --code-keyword: #3ddc97;
+  --code-string: #ffc857;
+  --code-number: #ff9b71;
+  --code-comment: #5b6b63;
+  --code-title: #6cb8ff;
+  --code-type: #c792ea;
+  --code-meta: #89ddff;
+
+  /* Sem aspas nas stacks — getComputedStyle(--font-body) vai para style="" do HF do Playwright */
+  --font-display: JetBrains Mono, ui-monospace, monospace;
+  --font-mono: JetBrains Mono, ui-monospace, monospace;
+  /* trocar para JetBrains Mono para o visual 100% terminal */
+  --font-body: Inter, sans-serif;
+  --fs-body: 9.5pt;
+  --radius: 0;
+  --radius-sm: 0;
+  --radius-pill: 0;
+}
+
+/* --------------------------------------------------------------------------- */
+
+[data-preset="terminal"] {
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  color: var(--text);
+}
+
+[data-preset="terminal"] .doc {
+  background: var(--bg);
+}
+
+/* Sem cantos arredondados sobrando da base */
+[data-preset="terminal"] .hero,
+[data-preset="terminal"] .card,
+[data-preset="terminal"] .code-window,
+[data-preset="terminal"] .table-wrap,
+[data-preset="terminal"] :not(pre) > code,
+[data-preset="terminal"] blockquote,
+[data-preset="terminal"] .badge {
+  border-radius: 0;
+}
+
+/* Dropcap da base não combina com CLI */
+[data-preset="terminal"][data-dropcap="true"] .content > p:first-of-type::first-letter {
+  float: none;
+  font-size: inherit;
+  font-family: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+  padding: 0;
+  color: inherit;
+}
+
+/* ===== Hero — sem card ==================================================== */
+/* flex wrap + display:contents: "~/eyebrow · date" na 1ª row; resto em 100% width */
+
+[data-preset="terminal"] .hero {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  padding: 0 0 1rem;
+  margin: 0 0 1.25rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  position: relative;
+}
+
+[data-preset="terminal"] .hero-meta {
+  display: contents;
+}
+
+[data-preset="terminal"] .hero-eyebrow {
+  order: 1;
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-mono);
+  font-size: 8pt;
+  font-weight: 400;
+  letter-spacing: 0;
+  text-transform: lowercase;
+  color: var(--text-muted);
+}
+
+[data-preset="terminal"] .hero-eyebrow::before {
+  content: "~/";
+}
+
+[data-preset="terminal"] .hero-meta .hero-date {
+  order: 2;
+  flex: 1 1 auto;
+  margin: 0 0 0.45rem;
+  font-family: var(--font-mono);
+  font-size: 8pt;
+  letter-spacing: 0;
+  text-transform: lowercase;
+  color: var(--text-muted);
+}
+
+[data-preset="terminal"] .hero-meta .hero-date::before {
+  /* nbsp evita colapso do espaço no flex (display:contents) */
+  content: "\00a0·\00a0";
+}
+
+[data-preset="terminal"] .hero-title {
+  order: 10;
+  flex: 0 0 100%;
+  width: 100%;
+  margin: 0.1rem 0 0.45rem;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 22pt;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  text-transform: lowercase;
+  text-wrap: balance;
+  color: var(--text-strong);
+}
+
+[data-preset="terminal"] .hero-title::before,
+[data-preset="terminal"] .hero-title::after {
+  content: "";
+  display: inline-block;
+  width: 0.55ch;
+  height: 1em;
+  background-color: var(--accent);
+  vertical-align: -0.12em;
+  white-space: nowrap;
+}
+
+[data-preset="terminal"] .hero-title::before {
+  margin-right: 0.12em;
+}
+
+[data-preset="terminal"] .hero-title::after {
+  margin-left: 0.12em;
+}
+
+[data-preset="terminal"] .hero-title mark {
+  background: transparent;
+  color: var(--accent);
+}
+
+[data-preset="terminal"] .hero-subtitle {
+  order: 11;
+  flex: 0 0 100%;
+  flex-basis: 100%;
+  width: 100%;
+  min-width: 100%;
+  margin: 0 0 0.55rem;
+  font-family: var(--font-body);
+  font-size: 9.5pt;
+  color: var(--text-muted);
+}
+
+[data-preset="terminal"] .hero-subtitle::before {
+  content: "// ";
+  font-family: var(--font-mono);
+  color: var(--text-muted);
+}
+
+/* força nova flex line antes dos badges (evita subir ao lado do subtítulo) */
+[data-preset="terminal"] .hero::after {
+  content: "";
+  order: 19;
+  flex: 0 0 100%;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+[data-preset="terminal"] .hero-meta .badge {
+  order: 20;
+  margin: 0 0.55rem 0.3rem 0;
+}
+
+[data-preset="terminal"] .doc-stamp {
+  order: 30;
+  flex: 0 0 100%;
+  width: 100%;
+  border-top: 1px dashed var(--border);
+  font-family: var(--font-mono);
+  text-transform: lowercase;
+}
+
+[data-preset="terminal"] .doc-stamp dt {
+  text-transform: lowercase;
+  letter-spacing: 0;
+  color: var(--text-muted);
+}
+
+[data-preset="terminal"] .hero-side {
+  font-family: var(--font-mono);
+  font-size: 7pt;
+  text-transform: lowercase;
+  color: var(--text-muted);
+  opacity: 0.55;
+}
+
+[data-preset="terminal"] .dimension-label {
+  order: 40;
+  flex: 0 0 100%;
+  width: 100%;
+  font-family: var(--font-mono);
+  text-transform: lowercase;
+  color: var(--text-muted);
+}
+
+/* ===== Badges — [texto] sem fundo/borda ==================================== */
+
+[data-preset="terminal"] .badge {
+  display: inline-block;
+  white-space: nowrap;
+  background: transparent !important;
+  border: none !important;
+  padding: 0;
+  margin: 0 0.2em;
+  font-family: var(--font-mono);
+  font-size: 8pt;
+  font-weight: 500;
+  letter-spacing: 0;
+  text-transform: lowercase;
+  line-height: 1.4;
+  border-radius: 0;
+}
+
+[data-preset="terminal"] .badge::before {
+  content: "[";
+  color: inherit;
+}
+
+[data-preset="terminal"] .badge::after {
+  content: "]";
+  color: inherit;
+}
+
+[data-preset="terminal"] .badge.bloqueia,
+[data-preset="terminal"] .badge.erro {
+  color: var(--danger);
+}
+
+[data-preset="terminal"] .badge.importante,
+[data-preset="terminal"] .badge.aviso {
+  color: var(--warn);
+}
+
+[data-preset="terminal"] .badge.ok {
+  color: var(--ok);
+}
+
+[data-preset="terminal"] .badge.menor,
+[data-preset="terminal"] .badge.info {
+  color: var(--info);
+}
+
+/* ===== Títulos ============================================================ */
+
+[data-preset="terminal"] h1,
+[data-preset="terminal"] h2,
+[data-preset="terminal"] h3,
+[data-preset="terminal"] h4 {
+  font-family: var(--font-display);
+  text-transform: lowercase;
+  letter-spacing: 0;
+}
+
+[data-preset="terminal"] h2 {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  width: 100%;
+  margin: 1.35rem 0 0.55rem;
+  font-weight: 700;
+  font-size: 13pt;
+  line-height: 1.2;
+  color: var(--accent);
+}
+
+/* sobrescreve o ::before da base (só o counter) */
+[data-preset="terminal"] h2::before {
+  content: "## " counter(sec, decimal-leading-zero) " ";
+  display: inline;
+  width: auto;
+  height: auto;
+  border-radius: 0;
+  background: none;
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 13pt;
+  flex-shrink: 0;
+}
+
+/* linha tracejada até a borda */
+[data-preset="terminal"] h2::after {
+  content: "";
+  flex: 1 1 auto;
+  height: 0;
+  border-bottom: 1px dashed var(--border);
+  min-width: 2rem;
+  margin-left: 0.35rem;
+}
+
+[data-preset="terminal"] h3 {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 10.5pt;
+  color: var(--text-strong);
+  margin: 1rem 0 0.4rem;
+}
+
+[data-preset="terminal"] h3::before {
+  content: "### ";
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+/* ===== Cards — dashed, sem fundo ========================================== */
+
+[data-preset="terminal"] .card {
+  background: transparent;
+  border: 1px dashed var(--border);
+  border-radius: 0;
+  padding: 0.7rem 0.85rem;
+}
+
+[data-preset="terminal"] .card-ok {
+  background: transparent;
+  border-color: var(--ok);
+}
+
+[data-preset="terminal"] .card-erro {
+  background: transparent;
+  border-color: var(--danger);
+}
+
+[data-preset="terminal"] .card-aviso {
+  background: transparent;
+  border-color: var(--warn);
+}
+
+[data-preset="terminal"] .card-info {
+  background: transparent;
+  border-color: var(--info);
+}
+
+[data-preset="terminal"] .card-card {
+  background: transparent;
+  border-color: var(--border);
+}
+
+[data-preset="terminal"] .card[data-label]::before {
+  content: "// " attr(data-label);
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 8pt;
+  font-weight: 500;
+  letter-spacing: 0;
+  text-transform: lowercase;
+  margin-bottom: 0.35rem;
+  color: var(--text-muted);
+}
+
+[data-preset="terminal"] .card-ok[data-label]::before { color: var(--ok); }
+[data-preset="terminal"] .card-erro[data-label]::before { color: var(--danger); }
+[data-preset="terminal"] .card-aviso[data-label]::before { color: var(--warn); }
+[data-preset="terminal"] .card-info[data-label]::before { color: var(--info); }
+[data-preset="terminal"] .card-card[data-label]::before { color: var(--accent); }
+
+/* ===== Código inline ====================================================== */
+
+[data-preset="terminal"] :not(pre) > code {
+  font-family: var(--font-mono);
+  font-size: 8.25pt;
+  padding: 1px 4px;
+  border-radius: 2px;
+  background: var(--surface-2);
+  color: var(--accent);
+  border: none;
+}
+
+/* ===== Blocos de código =================================================== */
+
+[data-preset="terminal"] .code-window {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 0;
+  overflow: hidden;
+}
+
+[data-preset="terminal"] .code-window-bar {
+  display: block;
+  background: transparent;
+  border-bottom: 1px solid var(--border);
+  padding: 0.3rem 0.6rem;
+  text-align: center;
+}
+
+[data-preset="terminal"] .code-window-dots {
+  display: none;
+}
+
+[data-preset="terminal"] .code-window-title {
+  font-family: var(--font-mono);
+  font-size: 7.5pt;
+  font-weight: 400;
+  color: var(--text-muted);
+  text-transform: lowercase;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+[data-preset="terminal"] .code-window-title::before {
+  content: "── ";
+}
+
+[data-preset="terminal"] .code-window-title::after {
+  content: " ──";
+}
+
+[data-preset="terminal"] .code-window pre {
+  counter-reset: ln;
+  padding: 0.65rem 0.5rem 0.65rem 0.35rem;
+}
+
+[data-preset="terminal"] .code-window code {
+  font-family: var(--font-mono);
+  font-size: 8pt;
+  color: var(--text);
+}
+
+[data-preset="terminal"] .code-window .ln {
+  display: block;
+  counter-increment: ln;
+}
+
+[data-preset="terminal"] .code-window .ln::before {
+  content: counter(ln);
+  display: inline-block;
+  width: 3ch;
+  margin-right: 1.1ch;
+  text-align: right;
+  color: #44564d;
+  font-family: var(--font-mono);
+  font-size: 8pt;
+  font-weight: 400;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+[data-preset="terminal"] .hljs-comment {
+  font-style: italic;
+  color: var(--code-comment);
+}
+
+/* ===== Tabelas ============================================================ */
+
+[data-preset="terminal"] .table-wrap {
+  border: 1px solid var(--border);
+  border-radius: 0;
+  background: transparent;
+}
+
+[data-preset="terminal"] table {
+  background: transparent;
+}
+
+[data-preset="terminal"] th {
+  background: transparent;
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-size: 8pt;
+  font-weight: 500;
+  letter-spacing: 0;
+  text-transform: lowercase;
+  border-bottom: 1px solid var(--accent);
+  padding: 0.45rem 0.55rem;
+}
+
+[data-preset="terminal"] td {
+  border-bottom: 1px dashed var(--border);
+  background: transparent !important;
+  color: var(--text);
+  font-size: 8.25pt;
+}
+
+[data-preset="terminal"] tbody tr:nth-child(even) td {
+  background: transparent !important;
+}
+
+[data-preset="terminal"] tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* ===== Listas ============================================================= */
+
+[data-preset="terminal"] ul > li::before {
+  content: "›";
+  background: none;
+  width: auto;
+  height: auto;
+  border-radius: 0;
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 11pt;
+  line-height: 1;
+  top: 0.05em;
+  left: 0.1rem;
+}
+
+[data-preset="terminal"] ol > li::marker {
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-weight: 500;
+}
+
+/* ===== Blockquote ========================================================= */
+
+[data-preset="terminal"] blockquote {
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  padding: 0.15rem 0 0.15rem 0;
+  margin: 0.85rem 0;
+  color: color-mix(in srgb, var(--text-muted) 55%, var(--text));
+  display: flex;
+  align-items: flex-start;
+  gap: 0;
+}
+
+[data-preset="terminal"] blockquote::before {
+  content: "> ";
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-weight: 500;
+  flex-shrink: 0;
+}
+
+[data-preset="terminal"] blockquote p {
+  margin: 0;
+  color: color-mix(in srgb, var(--text-muted) 55%, var(--text));
+}
+
+/* ===== Metadados / links ================================================== */
+
+[data-preset="terminal"] a {
+  color: var(--accent);
+}
+
+[data-preset="terminal"] strong {
+  color: var(--text-strong);
+  font-weight: 600;
+}
+
+[data-preset="terminal"] hr {
+  border-top: 1px dashed var(--border);
+}

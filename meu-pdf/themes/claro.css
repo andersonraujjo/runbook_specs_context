@@ -1,0 +1,38 @@
+/* Claro — fundo claro, texto escuro; badges/cards com mais opacidade via color-mix no layout */
+:root {
+  --bg: #f6f4f8;
+  --surface: #ffffff;
+  --surface-2: #ebe6f2;
+  --border: #7c3aed;
+  --accent: #7c3aed;
+  --accent-2: #ddd6fe;
+  --text: #1a1228;
+  --text-muted: #6b6280;
+
+  --ok: #15803d;
+  --danger: #b91c1c;
+  --warn: #b45309;
+  --info: #1d4ed8;
+
+  --code-keyword: #6d28d9;
+  --code-string: #15803d;
+  --code-number: #c2410c;
+  --code-comment: #6b6280;
+  --code-title: #1d4ed8;
+  --code-type: #a16207;
+  --code-meta: #0e7490;
+
+  /* Contraste maior em fundo claro (sobrescreve os derivados padrão do theme.css) */
+  --ok-bg: color-mix(in srgb, var(--ok) 18%, var(--surface));
+  --ok-border: color-mix(in srgb, var(--ok) 55%, transparent);
+  --danger-bg: color-mix(in srgb, var(--danger) 16%, var(--surface));
+  --danger-border: color-mix(in srgb, var(--danger) 50%, transparent);
+  --warn-bg: color-mix(in srgb, var(--warn) 16%, var(--surface));
+  --warn-border: color-mix(in srgb, var(--warn) 50%, transparent);
+  --info-bg: color-mix(in srgb, var(--info) 16%, var(--surface));
+  --info-border: color-mix(in srgb, var(--info) 50%, transparent);
+  --card-neutral-bg: color-mix(in srgb, var(--accent) 14%, var(--surface));
+  --card-neutral-border: color-mix(in srgb, var(--accent) 42%, transparent);
+  --accent-soft: color-mix(in srgb, var(--accent) 12%, var(--surface));
+  --border-soft: color-mix(in srgb, var(--border) 35%, transparent);
+}

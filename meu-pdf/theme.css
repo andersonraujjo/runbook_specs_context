@@ -1,0 +1,641 @@
+/* =============================================================================
+   meu-pdf — BASE neutra
+   Layout, grid, impressão e quebra de página. Sem decoração de preset.
+   Cores/tipografia vêm de presets/*.css (e opcionalmente themes/ + palette:).
+   ============================================================================= */
+
+:root {
+  /* Fallbacks neutros — o preset sobrescreve */
+  --font-display: "Syne", sans-serif;
+  --font-body: "Inter", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+  --title-weight: 700;
+  --title-tracking: -0.04em;
+  --title-leading: 1.08;
+  --fs-body: 9.75pt;
+  --fs-small: 7.5pt;
+  --fs-code: 8pt;
+  --lh: 1.55;
+  --radius: 12px;
+  --radius-sm: 8px;
+  --radius-pill: 999px;
+  --pad-x: 0;
+  --pad-y: 0;
+
+  /* Derivados via color-mix (sem hex) — dependem dos tokens do preset/tema */
+  --border-color: color-mix(in srgb, var(--border) 28%, transparent);
+  --border-soft: color-mix(in srgb, var(--border) 14%, transparent);
+  --accent-soft: color-mix(in srgb, var(--accent) 14%, transparent);
+  --accent-border: color-mix(in srgb, var(--accent) 45%, transparent);
+  --ok-bg: color-mix(in srgb, var(--ok) 12%, transparent);
+  --ok-border: color-mix(in srgb, var(--ok) 45%, transparent);
+  --danger-bg: color-mix(in srgb, var(--danger) 12%, transparent);
+  --danger-border: color-mix(in srgb, var(--danger) 45%, transparent);
+  --warn-bg: color-mix(in srgb, var(--warn) 12%, transparent);
+  --warn-border: color-mix(in srgb, var(--warn) 45%, transparent);
+  --info-bg: color-mix(in srgb, var(--info) 12%, transparent);
+  --info-border: color-mix(in srgb, var(--info) 45%, transparent);
+  --card-neutral-bg: color-mix(in srgb, var(--accent) 12%, transparent);
+  --card-neutral-border: color-mix(in srgb, var(--accent) 40%, transparent);
+  --text-secondary: color-mix(in srgb, var(--text) 62%, var(--text-muted));
+  --erro: var(--danger);
+  --erro-bg: var(--danger-bg);
+  --erro-border: var(--danger-border);
+  --aviso: var(--warn);
+  --aviso-bg: var(--warn-bg);
+  --aviso-border: var(--warn-border);
+}
+
+/* -----------------------------------------------------------------------------
+   Impressão — geometria só em @page (fonte da verdade).
+   Header/footer via margin boxes injetados em <style id="page-chrome">.
+   html { background } cobre a página inteira, inclusive a área de margem.
+   ----------------------------------------------------------------------------- */
+
+@page {
+  size: A4;
+  margin: 18mm 14mm 20mm;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  line-height: var(--lh);
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+.doc {
+  padding: 0;
+  background: var(--bg);
+}
+
+/* -----------------------------------------------------------------------------
+   Hero — estrutura neutra (preset mostra/esconde/reposiciona)
+   ----------------------------------------------------------------------------- */
+
+.hero {
+  margin: 0 0 1.25rem;
+  padding: 1rem 1.1rem;
+  background: var(--surface);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  break-inside: avoid;
+  page-break-inside: avoid;
+  position: relative;
+}
+
+.hero-eyebrow {
+  margin: 0 0 0.35rem;
+  font-size: var(--fs-small);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.hero-title {
+  margin: 0 0 0.45rem;
+  max-width: 88%;
+  font-family: var(--font-display);
+  font-weight: var(--title-weight);
+  font-size: 22pt;
+  line-height: var(--title-leading);
+  letter-spacing: var(--title-tracking);
+  text-wrap: balance;
+  color: var(--text);
+}
+
+.hero-title mark {
+  background: transparent;
+  color: var(--accent);
+}
+
+.hero-subtitle {
+  margin: 0 0 0.75rem;
+  font-size: 10.5pt;
+  color: var(--text-secondary);
+  max-width: 42em;
+}
+
+.hero-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 0.5rem;
+  align-items: center;
+}
+
+.hero-date {
+  font-size: var(--fs-small);
+  color: var(--text-muted);
+}
+
+/* Só alguns presets usam — escondidos na base; reativar no preset */
+.doc-stamp,
+.hero-side,
+.dimension-label {
+  display: none;
+}
+
+.doc-stamp {
+  grid-template-columns: repeat(auto-fill, minmax(7rem, 1fr));
+  gap: 0.35rem 0.75rem;
+  margin: 0.85rem 0 0;
+  padding: 0.55rem 0 0;
+  border-top: 1px solid var(--border-soft);
+  font-size: var(--fs-small);
+}
+
+.doc-stamp dt {
+  margin: 0;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 600;
+}
+
+.doc-stamp dd {
+  margin: 0.1rem 0 0;
+  color: var(--text);
+}
+
+.hero-side {
+  position: absolute;
+  top: 0.75rem;
+  right: 1rem;
+  font-family: var(--font-mono);
+  font-size: 7pt;
+  color: var(--text-muted);
+  opacity: 0.7;
+  max-width: 40%;
+  text-align: right;
+  word-break: break-all;
+}
+
+.dimension-label {
+  margin: 0.5rem 0 0;
+  font-family: var(--font-mono);
+  font-size: 6.5pt;
+  color: var(--text-muted);
+  letter-spacing: 0.04em;
+}
+
+/* Dropcap opcional (body[data-dropcap="true"]) */
+body[data-dropcap="true"] .content > p:first-of-type::first-letter {
+  font-family: var(--font-display);
+  font-weight: var(--title-weight);
+  font-size: 2.4em;
+  float: left;
+  line-height: 0.9;
+  padding: 0.05em 0.12em 0 0;
+  color: var(--accent);
+}
+
+/* Grid opcional */
+body[data-grid="true"] .doc {
+  background-image:
+    linear-gradient(color-mix(in srgb, var(--border) 8%, transparent) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in srgb, var(--border) 8%, transparent) 1px, transparent 1px);
+  background-size: 12px 12px;
+  background-position: -1px -1px;
+}
+
+/* -----------------------------------------------------------------------------
+   Tipografia / conteúdo
+   ----------------------------------------------------------------------------- */
+
+.content {
+  counter-reset: sec;
+}
+
+.content > :first-child {
+  margin-top: 0;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  color: var(--text);
+  break-after: avoid;
+  page-break-after: avoid;
+}
+
+h1 {
+  font-family: var(--font-display);
+  font-weight: var(--title-weight);
+  font-size: 15pt;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+  text-wrap: balance;
+  margin: 1.3rem 0 0.65rem;
+}
+
+h2 {
+  font-family: var(--font-display);
+  font-weight: var(--title-weight);
+  font-size: 13.5pt;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  text-wrap: balance;
+  margin: 1.4rem 0 0.6rem;
+  counter-increment: sec;
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+/* Numeração de seção — presets podem estilizar; base mostra decimal-leading-zero */
+h2::before {
+  content: counter(sec, decimal-leading-zero);
+  font-family: var(--font-mono);
+  font-size: 0.65em;
+  font-weight: 500;
+  color: var(--accent);
+  letter-spacing: 0;
+  flex-shrink: 0;
+}
+
+h3 {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 11.5pt;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+  text-wrap: balance;
+  margin: 1.1rem 0 0.4rem;
+  color: var(--accent);
+}
+
+h4 {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 10pt;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+  margin: 0.9rem 0 0.35rem;
+  color: var(--text-secondary);
+}
+
+p {
+  margin: 0 0 0.65rem;
+}
+
+/* Parágrafo introdutório fica com o bloco que apresenta */
+p:has(+ .code-window),
+p:has(+ .card),
+p:has(+ .table-wrap),
+p:has(+ ul),
+p:has(+ ol) {
+  break-after: avoid;
+  page-break-after: avoid;
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+strong {
+  font-weight: 600;
+  color: var(--text);
+}
+
+em {
+  font-style: italic;
+  color: var(--text-secondary);
+}
+
+hr {
+  border: none;
+  border-top: 1px solid var(--border-soft);
+  margin: 1.25rem 0;
+}
+
+ul,
+ol {
+  margin: 0 0 0.8rem;
+  padding-left: 1.15rem;
+}
+
+li {
+  margin: 0.18rem 0;
+}
+
+ul {
+  list-style: none;
+  padding-left: 0.15rem;
+}
+
+ul > li {
+  position: relative;
+  padding-left: 1.1rem;
+}
+
+ul > li::before {
+  content: "";
+  position: absolute;
+  left: 0.2rem;
+  top: 0.45em;
+  width: 0.35em;
+  height: 0.35em;
+  border-radius: 2px;
+  background: var(--accent);
+}
+
+ol {
+  padding-left: 1.3rem;
+}
+
+ol > li::marker {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+blockquote {
+  margin: 0.85rem 0;
+  padding: 0.65rem 0.9rem;
+  background: var(--accent-soft);
+  border-left: 3px solid var(--accent);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  color: var(--text-secondary);
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+
+blockquote p:last-child {
+  margin-bottom: 0;
+}
+
+/* -----------------------------------------------------------------------------
+   Badges — base mínima; preset define o visual
+   ----------------------------------------------------------------------------- */
+
+.badge {
+  display: inline-block;
+  white-space: nowrap;
+}
+
+/* Utilitário semântico mínimo para legibilidade sem preset preenchido */
+.badge.bloqueia,
+.badge.erro { color: var(--danger); }
+.badge.importante,
+.badge.aviso { color: var(--warn); }
+.badge.menor,
+.badge.info { color: var(--info); }
+.badge.ok { color: var(--ok); }
+
+/* -----------------------------------------------------------------------------
+   Cards
+   ----------------------------------------------------------------------------- */
+
+.card {
+  margin: 0.85rem 0;
+  padding: 0.8rem 0.95rem;
+  border-radius: var(--radius);
+  border: 1px solid var(--border-color);
+  background: var(--surface);
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+
+.card > :first-child { margin-top: 0; }
+.card > :last-child { margin-bottom: 0; }
+
+.card-ok { background: var(--ok-bg); border-color: var(--ok-border); }
+.card-erro { background: var(--danger-bg); border-color: var(--danger-border); }
+.card-aviso { background: var(--warn-bg); border-color: var(--warn-border); }
+.card-info { background: var(--info-bg); border-color: var(--info-border); }
+.card-card { background: var(--card-neutral-bg); border-color: var(--card-neutral-border); }
+
+/* Rótulo via data-label — presets podem reposicionar */
+.card[data-label]::before {
+  content: attr(data-label);
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 6.5pt;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 0.35rem;
+}
+
+/* -----------------------------------------------------------------------------
+   Código
+   ----------------------------------------------------------------------------- */
+
+/* Sem ligaduras na mono — evita >= :: fi etc. virarem glifos no PDF */
+code,
+pre,
+kbd,
+samp,
+.ln,
+.code-window-title,
+.hero-side,
+.dimension-label,
+h2::before,
+.card[data-label]::before {
+  font-variant-ligatures: none;
+  font-feature-settings: "liga" 0, "calt" 0;
+}
+
+/* Flags --… / ... em células — não quebrar no hífen */
+code .code-nobreak {
+  white-space: nowrap;
+  word-break: keep-all;
+  overflow-wrap: normal;
+}
+
+:not(pre) > code {
+  font-family: var(--font-mono);
+  font-size: 8.25pt;
+  padding: 0.1em 0.35em;
+  border-radius: 4px;
+  background: color-mix(in srgb, var(--accent) 18%, var(--surface-2));
+  color: color-mix(in srgb, var(--accent) 30%, var(--text));
+  border: 1px solid color-mix(in srgb, var(--accent) 22%, transparent);
+}
+
+.code-window {
+  margin: 0.9rem 0;
+  border-radius: var(--radius);
+  border: 1px solid var(--border-color);
+  background: var(--surface-2);
+  overflow: hidden;
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+
+.code-window-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.4rem 0.7rem;
+  background: color-mix(in srgb, var(--surface) 80%, var(--bg));
+  border-bottom: 1px solid var(--border-soft);
+}
+
+.code-window-dots {
+  display: flex;
+  gap: 5px;
+  flex-shrink: 0;
+}
+
+.code-window-dots span {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.code-window-dots .dot-r { background: var(--danger); }
+.code-window-dots .dot-y { background: var(--warn); }
+.code-window-dots .dot-g { background: var(--ok); }
+
+.code-window-title {
+  font-family: var(--font-mono);
+  font-size: 7pt;
+  color: var(--text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.code-window pre {
+  margin: 0;
+  padding: 0.75rem 0.85rem;
+  background: transparent;
+  overflow-x: auto;
+  counter-reset: ln;
+}
+
+.code-window code {
+  font-family: var(--font-mono);
+  font-size: var(--fs-code);
+  line-height: 1.5;
+  color: var(--text);
+  background: transparent;
+  border: none;
+  padding: 0;
+  white-space: pre;
+  word-break: normal;
+}
+
+/* Linhas para numeração opcional pelo preset (counter no ::before) */
+.code-window .ln {
+  display: block;
+  counter-increment: ln;
+}
+
+pre {
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+
+/* -----------------------------------------------------------------------------
+   Tabelas
+   ----------------------------------------------------------------------------- */
+
+.table-wrap {
+  margin: 0.9rem 0;
+  border-radius: var(--radius);
+  border: 1px solid var(--border-color);
+  overflow: visible;
+  background: var(--surface);
+}
+
+table {
+  width: 100%;
+  table-layout: auto;
+  border-collapse: collapse;
+  font-size: 8.5pt;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+thead {
+  display: table-header-group;
+}
+
+tbody {
+  display: table-row-group;
+}
+
+th {
+  background: linear-gradient(180deg, var(--accent-2) 0%, var(--surface-2) 100%);
+  color: color-mix(in srgb, var(--text) 88%, var(--accent));
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 7.5pt;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-align: left;
+  padding: 4pt 6pt;
+  border-bottom: 1px solid var(--accent-border);
+}
+
+td {
+  padding: 4pt 6pt;
+  border-bottom: 1px solid var(--border-soft);
+  color: var(--text-secondary);
+  vertical-align: top;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+}
+
+/* Chips de código em célula — <wbr> no build + quebra só em pontos seguros */
+td code {
+  white-space: normal;
+  word-break: normal;
+  overflow-wrap: break-word;
+  hyphens: none;
+  -webkit-hyphens: none;
+  max-width: 100%;
+}
+
+/* Colunas classificadas no build.mjs */
+th.col-narrow,
+td.col-narrow {
+  width: 1%;
+  white-space: nowrap;
+}
+
+th.col-code,
+td.col-code {
+  min-width: 30%;
+}
+
+tr {
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+
+tbody tr:last-child td {
+  border-bottom: none;
+}
+
+tbody tr:nth-child(even) td {
+  background: color-mix(in srgb, var(--text) 2.5%, transparent);
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}

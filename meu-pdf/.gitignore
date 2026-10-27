@@ -1,0 +1,15 @@
+node_modules/
+out/
+*.pdf
+.DS_Store
+Thumbs.db
+
+# GUI / PyInstaller
+meu-pdf.exe
+*.exe
+ui/*.spec
+ui/settings.json
+settings.json
+__pycache__/
+ui/__pycache__/
+*.py[cod]

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{{TITLE_PLAIN}}</title>
+  <style>{{FONTS_CSS}}</style>
+  <style>{{HLJS_CSS}}</style>
+  <!-- Ordem: base → preset → tema opcional → overrides -->
+  <link rel="stylesheet" href="{{LAYOUT_HREF}}" />
+  <link rel="stylesheet" href="{{PRESET_HREF}}" />
+  {{THEME_LINK}}
+  <style>
+    :root {
+      {{ROOT_OVERRIDES}}
+    }
+  </style>
+</head>
+<body
+  data-preset="{{PRESET_NAME}}"
+  data-dropcap="{{DROP_CAP}}"
+  data-grid="{{GRID}}"
+>
+  <main class="doc">
+    {{HERO}}
+
+    <article class="content">
+      {{CONTENT}}
+    </article>
+  </main>
+</body>
+</html>

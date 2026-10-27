@@ -1,0 +1,49 @@
+/* =============================================================================
+   Preset: blueprint
+   Preencha as regras em [data-preset="blueprint"] depois.
+   ============================================================================= */
+
+:root {
+  --bg: #0b0814;
+  --surface: #130e1f;
+  --surface-2: #1a1428;
+  --border: #b100ff;
+  --accent: #b100ff;
+  --accent-2: #2a1640;
+  --text: #e8e4f0;
+  --text-muted: #6e677f;
+
+  --ok: #3dcf8e;
+  --danger: #ff7b7b;
+  --warn: #f0b429;
+  --info: #5b9dff;
+
+  --code-keyword: #c792ea;
+  --code-string: #c3e88d;
+  --code-number: #f78c6c;
+  --code-comment: #6e677f;
+  --code-title: #82aaff;
+  --code-type: #ffcb6b;
+  --code-meta: #89ddff;
+
+  --font-display: "Syne", sans-serif;
+  --font-body: "Inter", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+  --radius: 12px;
+}
+
+[data-preset="blueprint"] {
+  /* vazio de propósito */
+}
+
+[data-preset="blueprint"] .doc-stamp {
+  display: grid;
+}
+
+[data-preset="blueprint"] .hero-side {
+  display: block;
+}
+
+[data-preset="blueprint"] .dimension-label {
+  display: block;
+}

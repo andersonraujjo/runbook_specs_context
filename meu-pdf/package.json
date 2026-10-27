@@ -1,0 +1,30 @@
+{
+  "name": "meu-pdf",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Gerador de PDF a partir de Markdown — tema dark dashboard/dev",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "node build.mjs docs/exemplo.md",
+    "build:all": "node build.mjs --all",
+    "watch": "node build.mjs docs/exemplo.md --watch"
+  },
+  "dependencies": {
+    "@fontsource/fraunces": "^5.3.0",
+    "@fontsource/inter": "^5.2.5",
+    "@fontsource/jetbrains-mono": "^5.2.5",
+    "@fontsource/space-grotesk": "^5.3.0",
+    "@fontsource/syne": "^5.2.5",
+    "gray-matter": "^4.0.3",
+    "highlight.js": "^11.11.1",
+    "markdown-it": "^14.1.0",
+    "markdown-it-anchor": "^9.2.0",
+    "markdown-it-attrs": "^4.3.1",
+    "markdown-it-bracketed-spans": "^1.0.1",
+    "markdown-it-container": "^4.0.0",
+    "playwright": "^1.51.0"
+  }
+}
